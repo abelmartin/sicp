@@ -1,4 +1,5 @@
 ; Section 1.2.1
+; ------------ Sweet Factorial Hotness ------------
 (defn factorial [n]
   (if (= n 1)
       1
@@ -30,8 +31,25 @@
           (> n 5) "Biger Than Five"
           :else "Less Than Five" ) )
 
+; ------------ Fibonacci ------------
 (defn fib [n]
-  (cond (= n 0) 0
+    (cond (= n 0) 0
         (= n 1) 1
         :else (+ (fib (- n 1)) (fib (- n 2)))))
 
+; ------------ Counting Change ------------
+(defn cc [amount kinds-of-coins]
+  (cond (= amount 0) 1
+       (or (< amount 0) (= kinds-of-coins 0)) 0
+       :else (+ (cc amount (- kinds-of-coins 1))
+           (cc (- amount (first-denomination kinds-of-coins)) kinds-of-coins ) )
+))
+
+(defn first-denomination [kinds-of-coins]
+  (cond (= kinds-of-coins 1) 1
+        (= kinds-of-coins 2) 5
+        (= kinds-of-coins 3) 10
+        (= kinds-of-coins 4) 25
+        (= kinds-of-coins 5) 50 ) )
+
+(defn count-change [amount] (cc amount 5))
