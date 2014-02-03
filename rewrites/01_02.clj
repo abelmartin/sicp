@@ -53,3 +53,28 @@
         (= kinds-of-coins 5) 50 ) )
 
 (defn count-change [amount] (cc amount 5))
+
+; ------------ Calculating Exponents ------------
+(defn expt [base, exp]
+    (if (= exp 0)
+        1
+        (* base (expt base (- exp 1)))
+    )
+)
+
+(defn expt2 [base, exp]
+    (expt-iter base exp 1))
+
+(defn expt-iter [base, counter, product]
+    (if (= counter 0)
+        product
+        (recur base (- counter 1) (* base product))
+    )
+)
+
+(defn fast-expt [base, exp]
+    (cond (= exp 0) 1
+          (= (mod exp 2) 0) (square (fast-expt base (/ exp 2)))
+          :else (* base (fast-expt base (- exp 1)))
+    )
+)
