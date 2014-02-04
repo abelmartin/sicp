@@ -54,6 +54,7 @@
 
 (defn count-change [amount] (cc amount 5))
 
+; Section 1.2.3
 ; ------------ Calculating Exponents ------------
 (defn expt [base, exp]
     (if (= exp 0)
@@ -79,5 +80,15 @@
     (cond (= exp 0) 1
           (= (mod exp 2) 0) (square-me (fast-expt base (/ exp 2)))
           :else (* base (fast-expt base (- exp 1)))
+    )
+)
+
+; Section 1.2.6
+; ------------ Testing Primality ------------
+; Fermat Test
+(defn expmod [base, exp, m]
+    (cond (= exp 0) 1
+          (= (mod exp 2) 0) (mod (sqr (expmod base (/ exp 2) m)))
+          :else (mod (* base (expmod base (- exp 1) m)) m)
     )
 )
